@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Avatar, ListItem, ListItemAvatar, ListItemText } from "@mui/material";
 
 import { Repository } from "types/repository.types";
@@ -7,6 +8,11 @@ interface IReposioriesNodeProps {
 }
 
 const RepositoriesNode: React.FC<IReposioriesNodeProps> = ({ repository }) => {
+  const description = useMemo(() => {
+    return `${repository?.description?.slice(0, 600)}${repository?.description?.length > 600 ? '...' : ''}`
+
+  }, [repository.description])
+
   return (
     <ListItem
       onClick={() => {
@@ -32,7 +38,7 @@ const RepositoriesNode: React.FC<IReposioriesNodeProps> = ({ repository }) => {
       </ListItemAvatar>
       <ListItemText
         primary={repository.full_name}
-        secondary={repository.description}
+        secondary={description}
       />
     </ListItem>
   );

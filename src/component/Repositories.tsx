@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 
 import {
   TextField,
@@ -11,11 +11,15 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 
 import useRepositories from "hook/useRepositories";
+
 import RepositoriesNode from "./RepositoriesNode";
 
 const Repositories = () => {
   const [search, setSearch] = useState("");
-  const [pagination, setPagination] = useState({
+  const [pagination, setPagination] = useState<{
+    pages: number;
+    rowsPerPage: number;
+  }>({
     pages: 0,
     rowsPerPage: 10,
   });
@@ -26,10 +30,6 @@ const Repositories = () => {
     pagination.rowsPerPage,
     1000
   );
-
-  useEffect(() => {
-    console.log(repositories);
-  }, [repositories]);
 
   return (
     <Container>
@@ -56,25 +56,26 @@ const Repositories = () => {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
-      {repositories.length > 0 && (
-        <>
-          <List>
-            {repositories.map((repository) => (
-              <RepositoriesNode key={repository.id} repository={repository} />
-            ))}
-          </List>
-          <TablePagination
-            count={totalCount}
-            page={pagination.pages}
-            onPageChange={(e, page) =>
-              setPagination({ ...pagination, pages: page })
-            }
-            rowsPerPage={pagination.rowsPerPage}
-            onRowsPerPageChange={(e) => {
-              setPagination({ pages: 0, rowsPerPage: +e.target.value });
-            }}
-          />
-        </>
+      {search && repositories.length === 0 ? <span>0 match found</span> : <></>}
+      <List>
+        {repositories.map((repository) => (
+          <RepositoriesNode key={repository.id} repository={repository} />
+        ))}
+      </List>
+      {repositories.length > 0 ? (
+        <TablePagination
+          count={totalCount}
+          page={pagination.pages}
+          onPageChange={(e, page) =>
+            setPagination({ ...pagination, pages: page })
+          }
+          rowsPerPage={pagination.rowsPerPage}
+          onRowsPerPageChange={(e) => {
+            setPagination({ pages: 0, rowsPerPage: +e.target.value });
+          }}
+        />
+      ) : (
+        <></>
       )}
     </Container>
   );
