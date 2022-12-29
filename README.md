@@ -1,46 +1,64 @@
-# Getting Started with Create React App
+# Repository Search
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a small React app that allows you to search for repositories on GitHub and view their details.
 
-## Available Scripts
+## Prerequisites
 
-In the project directory, you can run:
+Before you begin, make sure you have the following installed:
 
-### `npm start`
+Node.js and npm (comes with Node.js)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Git
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Getting started
 
-### `npm test`
+To get started with the app, follow these steps:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Clone the repository to your local machine:
 
-### `npm run build`
+```
+git clone https://github.com/Nicolas-Menettrier/repository-search.git
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Navigate to the project directory:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+cd repository-search
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Install the dependencies:
 
-### `npm run eject`
+```
+npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Run the development server:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+npm start
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+The app will now be running at http://localhost:3000.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Configuring the GitHub API access
 
-## Learn More
+To access the GitHub API, you will need to provide a personal access token in the REACT_APP_GITHUB_TOKEN environment variable. To obtain a personal access token, follow these steps:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Go to https://github.com/settings/tokens?type=beta
+- Click on "Generate new token"
+- Give your token a name
+- Click on "Generate token"
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Copy the generated token and set it as the value of the REACT_APP_GITHUB_TOKEN environment variable. You can do this by creating a .env file in the root of the project and adding the following line:
+
+```
+REACT_APP_GITHUB_TOKEN=YOUR_TOKEN_HERE
+```
+
+Replace YOUR_TOKEN_HERE with your actual personal access token.
+
+## Built with
+
+[React](https://fr.reactjs.org/) - JavaScript library for building user interfaces
+
+[GitHub API](https://docs.github.com/en/rest/search?apiVersion=2022-11-28#search-repositories) - RESTful API for interacting with GitHub
